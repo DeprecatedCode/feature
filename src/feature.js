@@ -108,7 +108,7 @@ var local = function (type, scope) {
 
 var load = function (dir, type, features) {
   features.forEach(function (feature) {
-    types[type][feature] = require(dir + '/' + type + '.' + feature + '.js');
+    types[type][feature] = require(dir + '/' + type + '/' + feature + '.js');
   });
   return function (value) {
     return new Value(type, value);
@@ -119,7 +119,7 @@ module.exports = {
   build: function (dir, config) {
     var mod = {};
     if (!config || typeof config !== 'object') {
-      throw new Error('first argument to feature.build(...) must be an object');
+      throw new Error('second argument to feature.build(dir, config) must be an object');
     }
     Object.keys(config).forEach(function (key) {
       types[key] = {};
